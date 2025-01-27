@@ -280,12 +280,55 @@ namespace CasinoApp
 
         static int EvaluateHand(List<Card> hand)
         {
-            foreach (var card in hand)
-            {
-            }
+            // Grupowanie kart według wartości
+            var rankGroups = hand.GroupBy(card => card.Rank)
+                                 .OrderByDescending(group => group.Count())
+                                 .ThenByDescending(group => group.Key)
+                                 .ToList();
 
-            return 0;
+            bool isFlush = hand.All(card => card.Suit == hand[0].Suit);
+            List<int> ranks = hand.Select(card => card.Rank).OrderBy(rank => rank).ToList();
+            bool isStraight = IsStraight(ranks);
+
+          /* if (isStraight && isFlush && ranks.Contains(14))
+               return 10; // Poker Królewski
+           if (isStraight && isFlush)
+                return 9; // Poker
+            if (rankGroups[0].Count() == 4)
+                return 8; // Kareta
+            if (rankGroups[0].Count() == 3 && rankGroups[1].Count() == 2)
+                return 7; // Full
+            if (isFlush)
+                return 6; // Kolor
+            if (isStraight)
+                return 5; // Strit
+            if (rankGroups[0].Count() == 3)
+                return 4; // Trójka
+            if (rankGroups[0].Count() == 2 && rankGroups[1].Count() == 2)
+                return 3; // Dwie Pary
+            if (rankGroups[0].Count() == 2)
+                return 2; // Para
+            return 1; // Wysoka Karta
         }
+
+        static string HandRankDescription(int rank)
+        {
+            return rank switch
+            {
+                10 => "Poker Królewski",
+                9 => "Poker",
+                8 => "Kareta",
+                7 => "Full",
+                6 => "Kolor",
+                5 => "Strit",
+                4 => "Trójka",
+                3 => "Dwie Pary",
+                2 => "Para",
+                1 => "Wysoka Karta",
+                _ => "Nieznany",
+            };
+        }*/
+
 
         static bool IsStraight(List<int> ranks)
         {
