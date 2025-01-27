@@ -290,7 +290,7 @@ namespace CasinoApp
             List<int> ranks = hand.Select(card => card.Rank).OrderBy(rank => rank).ToList();
             bool isStraight = IsStraight(ranks);
 
-          /* if (isStraight && isFlush && ranks.Contains(14))
+          if (isStraight && isFlush && ranks.Contains(14))
                return 10; // Poker Królewski
            if (isStraight && isFlush)
                 return 9; // Poker
@@ -327,7 +327,7 @@ namespace CasinoApp
                 1 => "Wysoka Karta",
                 _ => "Nieznany",
             };
-        }*/
+        }
 
 
         static bool IsStraight(List<int> ranks)
